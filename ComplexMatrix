@@ -1,0 +1,127 @@
+public class ComplexMatrix {
+    private ComplexNumber[][] data;
+    private int rows;
+    private int cols;
+    private ComplexMatrix[][] matrix;
+
+
+    public ComplexMatrix(int rows, int cols) {
+        this.rows = rows;
+        this.cols = cols;
+        this.data = new ComplexNumber[rows][cols];
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                data[i][j] = new ComplexNumber(0, 0);
+
+            }
+
+        }
+
+    }
+
+    public void setEl(int new_rows, int new_cols, ComplexNumber value) {
+        if (new_rows >= 0 && new_rows < rows && new_cols >= 0 && new_cols < cols) {
+            data[new_rows][new_cols] = value;
+
+        } else {
+            System.out.println("Некорректные индексы");
+        }
+    }
+
+    // метод получения элемента матрицы
+    public ComplexNumber getEl(int new_rows, int new_cols) {
+        if (new_rows >= 0 && new_rows < rows && new_cols >= 0 && new_cols < cols) {
+            return data[new_rows][new_cols];
+        } else {
+            System.out.println("Строка или столбец заданы неверно");
+            return null; // или выбросьте исключение
+        }
+    }
+
+    // метод сложения матриц
+    public ComplexMatrix plus(ComplexMatrix different) {
+        if (this.rows != different.rows || this.cols != different.cols) {
+            System.out.println("Матрица должны быть одного размера. Невозможно выполнить операцию.");
+            return null;
+        }
+        ComplexMatrix result = new ComplexMatrix(rows, cols);
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                result.setEl(i, j, this.getEl(i, j).plus(different.getEl(i, j)));
+
+
+            }
+
+        }
+        return result;
+    }
+
+    public ComplexMatrix multiplication(ComplexMatrix different) {
+        if (this.cols != different.rows) {
+            System.out.println("Данные матрицы невозможно умножить");
+            return null;
+        }
+        ComplexMatrix result = new ComplexMatrix(this.rows, different.cols);
+        for (int i = 0; i < this.rows; i++) {
+            for (int j = 0; j < different.cols; j++) {
+                ComplexNumber sum = new ComplexNumber(0, 0);
+                for (int k = 0; k < this.cols; k++) {
+                    sum = sum.plus(this.getEl(i, k).multiplication(different.getEl(k, j)));
+
+
+                }
+                result.setEl(i, j, sum);
+
+            }
+
+        }
+        return result;
+    }
+
+    //вычитание
+    public ComplexMatrix minus(ComplexMatrix different) {
+        if (this.rows != different.rows || this.cols != different.cols) {
+            System.out.println("Матрица должны быть одного размера. Невозможно выполнить операцию.");
+            return null;
+        }
+        ComplexMatrix result = new ComplexMatrix(rows, cols);
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                ComplexNumber matrix1= this.data[i][j];
+                ComplexNumber matrix2 = different.data[i][j];
+                result.setEl(i, j, matrix1.minus(matrix2));
+
+
+            }
+
+        }
+        return result;
+    }
+
+    //транспонирование матрицы
+    public ComplexMatrix transpon() {
+        ComplexMatrix new_transpon = new ComplexMatrix(this.cols, this.rows);
+        for (int i = 0; i < this.rows; i++) {
+            for (int j = 0; j < this.cols; j++) {
+                new_transpon.setEl(j, i, this.getEl(i, j));
+
+            }
+
+        }
+        return new_transpon;
+    }
+
+    public String toString() {
+        StringBuilder sb = new StringBuilder();
+        for (int i = 0; i < rows; i++) {
+            sb.append("[ ");
+            for (int j = 0; j < cols; j++) {
+                sb.append(data[i][j].toString()).append("\t ");
+            }
+            sb.append("]");
+            sb.append("\n");
+
+        }
+        return sb.toString();
+    }
+}
