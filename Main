@@ -1,0 +1,43 @@
+public class Main {
+    public static void main(String[] args) {
+        ComplexMatrix matrix1= new ComplexMatrix(2,2);
+        matrix1.setEl(0, 0, new ComplexNumber(5, 9));
+        matrix1.setEl(0, 1, new ComplexNumber(9, 7));
+        matrix1.setEl(1, 0, new ComplexNumber(7, 6));
+        matrix1.setEl(1, 1, new ComplexNumber(8, 9));
+
+        ComplexMatrix matrix2 = new ComplexMatrix(2,2);
+        matrix2.setEl(0, 0, new ComplexNumber(3, 1));
+        matrix2.setEl(0, 1, new ComplexNumber(3, 0));
+        matrix2.setEl(1, 0, new ComplexNumber(2, 2));
+        matrix2.setEl(1, 1, new ComplexNumber(3, 3));
+
+        System.out.println("Матрица номер 1");
+        System.out.println(matrix1);
+
+        System.out.println("Матрица номер 2");
+        System.out.println(matrix2);
+
+        ComplexMatrix sum= matrix1.plus(matrix2);
+        System.out.println("сумма двух матриц");
+        System.out.println(sum);
+
+        ComplexMatrix subtraction= matrix1.minus(matrix2);
+        System.out.println("остаток от вычитания второй матриц из первой");
+        System.out.println(subtraction);
+
+        ComplexMatrix multi= matrix1.multiplication(matrix2);
+        System.out.println("произведение двух матриц");
+        System.out.println(multi);
+
+        ComplexMatrix transponirMatrix= matrix1.transpon();
+        System.out.println("транспонированная матрица номер 1");
+        System.out.println(transponirMatrix);
+
+
+
+
+
+
+    }
+}
