@@ -1,0 +1,34 @@
+import java.util.Scanner;
+/*в этом классе можно с клавиатуры ввести данные для матрицы
+и она выведется на экран в привычном виде
+ */
+public class EnterMatrix {
+        public static void main(String[] args) {
+            Scanner scanner= new Scanner(System.in);
+            System.out.println("Введите количество строк: ");
+            int rows = scanner.nextInt();
+            System.out.println("Введите количество столбцов: ");
+            int cols= scanner.nextInt();
+            ComplexNumber[][] matrix = new ComplexNumber[rows][cols];
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    System.out.println("Введите действительную часть элемента [" + i + "] [" + j + "]:");
+                    double real = scanner.nextDouble();
+                    System.out.println("Введите мнимую часть элемента [" + i + "]:");
+                    double imaginary = scanner.nextDouble();
+                    matrix[i][j] = new ComplexNumber(real, imaginary);
+
+                }
+
+            }
+            System.out.println("Введенная матрица:");
+            for (int i = 0; i < rows; i++) {
+                for (int j = 0; j < cols; j++) {
+                    System.out.print(matrix[i][j] + " ");
+                }
+                System.out.println();
+            }
+
+            scanner.close();
+        }
+}
