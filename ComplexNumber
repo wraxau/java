@@ -1,0 +1,38 @@
+public class ComplexNumber {
+        private double real;
+        private double imaginary;
+        public ComplexNumber(double real, double imaginary){
+            this.real = real;
+            this.imaginary =imaginary;
+        }
+         public String toString() {
+            if (imaginary == 0) return real + "";
+            if (real == 0) return imaginary + "i";
+            if (imaginary < 0) return real + " - " + (-imaginary) + "i";
+            return real + " + " + imaginary + "i";
+    }
+        public ComplexNumber plus(ComplexNumber different){
+            return new ComplexNumber(this.real + different.real, this.imaginary + different.imaginary);
+        }
+        public ComplexNumber minus(ComplexNumber different){
+            return new ComplexNumber(this.real - different.real, this.imaginary - different.imaginary);
+
+        }
+        public ComplexNumber multiplication(ComplexNumber different){
+            double newReal = this.real* different.real - this.imaginary* different.imaginary;
+            double newImaginary = this.real* different.imaginary+ this.imaginary*different.real;
+            return new ComplexNumber(newReal, newImaginary);
+        }
+        public ComplexNumber division(ComplexNumber different){
+           double lowerNumber = different.real* different.real - different.imaginary* different.imaginary;
+           double newReal = (this.real* different.real+ this.imaginary*different.imaginary)/ lowerNumber;
+           double newImaginary = (this.imaginary* different.real - this.real* different.imaginary)/ lowerNumber;
+           return new ComplexNumber(newReal, newImaginary);
+
+        }
+
+
+
+
+    }
+
